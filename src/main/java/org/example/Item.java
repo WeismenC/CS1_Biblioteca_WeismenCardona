@@ -1,4 +1,4 @@
 package org.example;
 
-public class Prestamo {
+public class Item {
 }
