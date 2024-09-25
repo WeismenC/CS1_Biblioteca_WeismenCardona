@@ -1,7 +1,6 @@
 package org.example;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
+    Person student = new Student(123456, "Juan", "Perez");
+    Person teacher = new Teacher(654321, "Ana", "Gómez");
 }

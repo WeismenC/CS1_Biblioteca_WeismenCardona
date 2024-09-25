@@ -7,6 +7,6 @@ public class Teacher extends Person{
 
     @Override
     public int getMaxLoans() {
-        return 5;
+        return 3;
     }
 }
