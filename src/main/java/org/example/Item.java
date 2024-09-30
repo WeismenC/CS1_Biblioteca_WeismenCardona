@@ -1,18 +1,18 @@
 package org.example;
 
 public class Item {
-    private String Id; //Consta de dos letras y 5 números
+    private String Id;
     private String Title;
     private String registeredDate;
     private int registeredAmount;
     private int currentAmount;
 
-    public Item(String id, String title, String registeredDate, int registeredAmount, int currentAmount) {
+    public Item(String id, String title, String registeredDate, int registeredAmount) {
         this.Id = id;
         this.Title = title;
         this.registeredDate = registeredDate;
         this.registeredAmount = registeredAmount;
-        this.currentAmount = currentAmount;
+        this.currentAmount = registeredAmount;
     }
 
     public String getId() {
@@ -60,9 +60,9 @@ public class Item {
     }
 
     public void decreaseQuantity(int quantity) {
-        if (this.currentAmount >= quantity){
-            this.currentAmount-= quantity;
-        }else{
+        if (this.currentAmount >= quantity) {
+            this.currentAmount -= quantity;
+        } else {
             System.out.println("No hay suficientes materiales disponibles.");
         }
     }
