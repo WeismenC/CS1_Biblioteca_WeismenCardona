@@ -73,12 +73,23 @@ public class Admin extends Person {
         }
     }
 
+    public void showRegisteredItems(){
+        if(items.isEmpty()){
+            System.out.println("No hay libros registrados.");
+        }else{
+            System.out.println("Libros registrados:");
+            for(Item item : items) {
+                System.out.println(item.getId() + " " + item.getTitle() + " " + item.getRegisteredDate() + " " + item.getCurrentAmount());
+            }
+        }
+    }
+
     public void addItem(Scanner scanner) {
         System.out.println("Ingrese el ID del material:");
         String id = scanner.next();
         System.out.println("Ingrese el título del material:");
         String title = scanner.next();
-        System.out.println("Ingrese la fecha de registro:");
+        System.out.println("Ingrese la fecha de registro dd/mm/aaaa:");
         String date = scanner.next();
         System.out.println("Ingrese la cantidad registrada:");
         int quantity = scanner.nextInt();

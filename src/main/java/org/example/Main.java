@@ -21,7 +21,8 @@ public class Main {
             System.out.println("6. Consultar historial de préstamos");
             System.out.println("7. Eliminar persona (solo Admin)");
             System.out.println("8. Mostrar personas registradas");
-            System.out.println("9. Salir");
+            System.out.println("9. Mostrar libros registrados.");
+            System.out.println("0. Salir");
 
             int option = scanner.nextInt();
 
@@ -51,6 +52,9 @@ public class Main {
                     admin.showRegisteredPeople();
                     break;
                 case 9:
+                    admin.showRegisteredItems();
+                    break;
+                case 0:
                     exit = true;
                     break;
                 default:
