@@ -20,7 +20,7 @@ public class Item {
     }
 
     public void setId(String id) {
-        Id = id;
+        this.Id = id;
     }
 
     public String getTitle() {
@@ -28,7 +28,7 @@ public class Item {
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.Title = title;
     }
 
     public String getRegisteredDate() {

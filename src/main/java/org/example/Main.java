@@ -1,14 +1,15 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.Scanner;
+import org.exceptions.DataException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DataException, IOException {
         Scanner scanner = new Scanner(System.in);
 
-        Admin admin = new Admin(123456, "Juan", "Pérez");
-
-        Loan loan = new Loan();
+        Admin admin = Admin.getInstance();
+        ILoan loan = new Loan();
 
         boolean exit = false;
         while (!exit) {
@@ -21,7 +22,7 @@ public class Main {
             System.out.println("6. Consultar historial de préstamos");
             System.out.println("7. Eliminar persona (solo Admin)");
             System.out.println("8. Mostrar personas registradas");
-            System.out.println("9. Mostrar libros registrados.");
+            System.out.println("9. Mostrar libros registrados");
             System.out.println("0. Salir");
 
             int option = scanner.nextInt();
@@ -31,22 +32,42 @@ public class Main {
                     admin.addPerson(scanner);
                     break;
                 case 2:
-                    loan.registerLoan(admin, scanner);
+                    if (admin.hasPeople()) {
+                        loan.registerLoan(admin, scanner);
+                    } else {
+                        throw DataException.userNotFound();
+                    }
                     break;
                 case 3:
-                    loan.registerReturn(admin, scanner);
+                    if (admin.hasPeople()) {
+                        loan.registerReturn(admin, scanner);
+                    } else {
+                        throw DataException.userNotFound();
+                    }
                     break;
                 case 4:
-                    admin.addItem(scanner);
+                    if (admin.authenticateAdmin(scanner)) {
+                        admin.addItem(scanner);
+                    } else {
+                        throw DataException.invalidUser();
+                    }
                     break;
                 case 5:
-                    admin.deleteItem(scanner);
+                    if (admin.authenticateAdmin(scanner)) {
+                        admin.deleteItem(scanner);
+                    } else {
+                        throw DataException.invalidUser();
+                    }
                     break;
                 case 6:
                     loan.checkHistory();
                     break;
                 case 7:
-                    admin.deletePerson(scanner);
+                    if (admin.authenticateAdmin(scanner)) {
+                        admin.deletePerson(scanner);
+                    } else {
+                        throw DataException.invalidUser();
+                    }
                     break;
                 case 8:
                     admin.showRegisteredPeople();
@@ -55,10 +76,11 @@ public class Main {
                     admin.showRegisteredItems();
                     break;
                 case 0:
+                    System.out.println("Finalizado.");
                     exit = true;
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    throw DataException.invalidOption();
             }
         }
     }
